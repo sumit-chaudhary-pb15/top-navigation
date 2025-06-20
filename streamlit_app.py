@@ -16,7 +16,7 @@ st.logo("https://www.streamlit.io/images/brand/streamlit-mark-color.svg", link="
 # --- Sidebar Content ---
 with st.sidebar:
     st.header("Navigation Demo")
-    st.write("This app demonstrates the **top navigation bar** feature in Streamlit. Briefly, using the `st.navigation()` method with the `position='top'` parameter.")
+    st.write("This app demonstrates the **top navigation bar** feature in Streamlit. \n Briefly, using the `st.navigation()` method with the `position='top'` parameter.")
 
     st.subheader("Interactive Widget")
     slider_value = st.slider(
