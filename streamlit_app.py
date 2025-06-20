@@ -18,16 +18,6 @@ with st.sidebar:
     st.header("Navigation Demo")
     st.write("This app demonstrates the **top navigation bar** feature in Streamlit. \n\n Briefly, this is implemented using the `st.navigation()` method with the `position='top'` parameter.")
 
-    st.subheader("Interactive Widget")
-    slider_value = st.slider(
-        "Adjust a value:",
-        min_value=0,
-        max_value=100,
-        value=50,
-        step=5,
-        help="This slider can control content on your pages."
-    )
-    st.info(f"Current slider value: **{slider_value}**")
 
 # --- Page Functions ---
 def home_page():
@@ -48,6 +38,7 @@ def home_page():
         nibh vulputate justo, vitae iaculis est urna vel justo.
     """)
     st.success(f"The value from the sidebar slider is: **{st.session_state.get('slider_value', 'N/A')}**")
+
 
 def dashboard_page():
     st.title("Dashboard")
@@ -80,12 +71,11 @@ def dashboard_page():
         st.bar_chart(bar_chart_data, x='Category', y='Value', color='Group')
 
     np.random.seed(42)
-    # Renamed variables and adjusted data generation to better span the chart area
     scatter_data = pd.DataFrame({
-        'Number of Customers': np.random.rand(50) * 100,      # Data from 0 to 100
-        'Revenue Generated': np.random.rand(50) * 100,        # Data from 0 to 100
-        'Avg Order Value': np.random.rand(50) * 10 + 5,       # For size, ensures points vary
-        'Conversion Efficiency': np.random.rand(50) * 100     # For color, ensures color variance
+        'Number of Customers': np.random.rand(50) * 100,
+        'Revenue Generated': np.random.rand(50) * 100,
+        'Avg Order Value': np.random.rand(50) * 10 + 5,
+        'Conversion Efficiency': np.random.rand(50) * 100
     })
 
     with chart_cols[1]:
@@ -129,8 +119,6 @@ def contact_page():
 # Store slider value in session_state to access it across pages
 if 'slider_value' not in st.session_state:
     st.session_state['slider_value'] = 50
-else:
-    st.session_state['slider_value'] = slider_value
 
 
 # Create pages using Material icons for navigation
