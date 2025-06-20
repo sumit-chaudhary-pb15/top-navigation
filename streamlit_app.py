@@ -39,7 +39,7 @@ def home_page():
     """)
 
     if st.button("See Dashboard"):
-        st.session_state["_st_current_page_idx"] = 1 # Index for Dashboard page
+        st.switch_page("Dashboard")
 
 
 def dashboard_page():
@@ -74,7 +74,7 @@ def dashboard_page():
 
     np.random.seed(42)
     scatter_data = pd.DataFrame({
-        'Acquisition Cost': np.random.uniform(0, 60, 50), # Adjusted to ensure values from 0
+        'Acquisition Cost': np.random.uniform(0, 60, 50),
         'Customer Lifetime Value': np.random.rand(50) * 500 + 100,
         'Number of Customers Acquired': np.random.rand(50) * 20 + 5,
         'Profitability Index': np.random.rand(50) * 100
@@ -128,15 +128,9 @@ pages = [
 ]
 
 # Set up top navigation
-# Initialize the current page based on session state for button navigation
-if "_st_current_page_idx" not in st.session_state:
-    st.session_state["_st_current_page_idx"] = 0 # Default to home page index
-
 current_page = st.navigation(
     pages,
     position="top",
-    # This will set the initial page based on session_state, enabling button navigation
-    index=st.session_state["_st_current_page_idx"]
 )
 
 # Run the selected page
