@@ -38,10 +38,6 @@ def home_page():
         nibh vulputate justo, vitae iaculis est urna vel justo.
     """)
 
-    if st.button("See Dashboard"):
-        st.switch_page("Dashboard")
-
-
 def dashboard_page():
     st.title("Dashboard")
     st.write("Overview of key metrics and data visualizations.")
@@ -74,20 +70,20 @@ def dashboard_page():
 
     np.random.seed(42)
     scatter_data = pd.DataFrame({
-        'Acquisition Cost': np.random.uniform(0, 60, 50),
-        'Customer Lifetime Value': np.random.rand(50) * 500 + 100,
-        'Number of Customers Acquired': np.random.rand(50) * 20 + 5,
-        'Profitability Index': np.random.rand(50) * 100
+        'Number of Customers': np.random.rand(50) * 100,
+        'Revenue Generated': np.random.rand(50) * 100,
+        'Avg Order Value': np.random.rand(50) * 10 + 5,
+        'Conversion Efficiency': np.random.rand(50) * 100
     })
 
     with chart_cols[1]:
-        st.subheader("Customer Acquisition vs. Lifetime Value")
+        st.subheader("Customers vs. Revenue")
         st.scatter_chart(
             scatter_data,
-            x='Acquisition Cost',
-            y='Customer Lifetime Value',
-            size='Number of Customers Acquired',
-            color='Profitability Index',
+            x='Number of Customers',
+            y='Revenue Generated',
+            size='Avg Order Value',
+            color='Conversion Efficiency',
             height=350
         )
 
@@ -118,7 +114,6 @@ def contact_page():
     st.text_area("Your Message")
     st.button("Send")
 
-
 # Create pages using Material icons for navigation
 pages = [
     st.Page(home_page, title="Home", icon=":material/home:", default=True),
@@ -128,10 +123,7 @@ pages = [
 ]
 
 # Set up top navigation
-current_page = st.navigation(
-    pages,
-    position="top",
-)
+current_page = st.navigation(pages, position="top")
 
 # Run the selected page
 current_page.run()
