@@ -125,10 +125,7 @@ pages = {
         "Main": [home, dashboard],
         "Information": [about, contact]
     }
-current_page = st.navigation(
-    pages,
-    position="top"
-)
+current_page = st.navigation(pages, position="top")
 
 # Run the selected page
 current_page.run()
