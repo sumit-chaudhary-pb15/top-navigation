@@ -5,7 +5,7 @@ import numpy as np
 # --- Page Configuration ---
 st.set_page_config(
     layout="wide",
-    page_title="My Streamlit App Demo",
+    page_title="Top Navigation Demo",
     page_icon=":material/home:"
 )
 
@@ -15,7 +15,7 @@ st.logo("https://www.streamlit.io/images/brand/streamlit-mark-color.svg", link="
 
 # --- Sidebar Content ---
 with st.sidebar:
-    st.header("Navigation Demo")
+    st.header("Top Navigation Demo")
     st.write("This app demonstrates the **top navigation bar** feature in Streamlit. \n\n Briefly, this is implemented using the `st.navigation()` method with the `position='top'` parameter.")
 
 
