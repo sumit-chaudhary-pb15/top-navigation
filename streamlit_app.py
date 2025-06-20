@@ -9,8 +9,9 @@ st.set_page_config(
     page_icon=":material/home:"
 )
 
-# Logo
+# Add the Streamlit logo
 st.logo("https://www.streamlit.io/images/brand/streamlit-mark-color.svg", link="https://streamlit.io")
+
 
 # --- Sidebar Content ---
 with st.sidebar:
@@ -69,35 +70,26 @@ def dashboard_page():
     chart_cols = st.columns(2)
 
     bar_chart_data = pd.DataFrame({
-        'Category': ['A', 'B', 'C', 'D', 'E'],
-        'Value_X': [150, 180, 200, 160, 220],
-        'Value_Y': [100, 120, 90, 110, 130]
+        'Category': ['A', 'B', 'C', 'D', 'E', 'A', 'B', 'C', 'D', 'E'],
+        'Value': [150, 220, 180, 260, 190, 100, 120, 90, 110, 130],
+        'Group': ['Group X', 'Group X', 'Group X', 'Group X', 'Group X', 'Group Y', 'Group Y', 'Group Y', 'Group Y', 'Group Y']
     })
-
-    bar_chart_melted = bar_chart_data.melt(
-        id_vars=['Category'],
-        value_vars=['Value_X', 'Value_Y'],
-        var_name='Group',
-        value_name='Value'
-    )
-    bar_chart_melted['Group'] = bar_chart_melted['Group'].replace({'Value_X': 'Group X', 'Value_Y': 'Group Y'})
-
 
     with chart_cols[0]:
         st.subheader("Sales by Category")
-        st.bar_chart(bar_chart_melted, x='Category', y='Value', color='Group')
+        st.bar_chart(bar_chart_data, x='Category', y='Value', color='Group')
 
     np.random.seed(42)
     scatter_data = pd.DataFrame({
-        'X': np.random.rand(50) * 100,
-        'Y': np.random.rand(50) * 100 + (np.random.rand(50) - 0.5) * 20,
+        'Active Users': np.random.rand(50) * 1000 + 500,
+        'Conversion Rate': np.random.rand(50) * 0.05 + 0.02,
         'Size': np.random.rand(50) * 10,
         'Density': np.random.rand(50) * 100
     })
 
     with chart_cols[1]:
-        st.subheader("Data Distribution")
-        st.scatter_chart(scatter_data, x='X', y='Y', size='Size', color='Density')
+        st.subheader("Active Users vs. Conversion Rate")
+        st.scatter_chart(scatter_data, x='Active Users', y='Conversion Rate', size='Size', color='Density')
 
 
 def about_page():
