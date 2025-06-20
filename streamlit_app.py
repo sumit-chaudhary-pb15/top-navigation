@@ -80,16 +80,24 @@ def dashboard_page():
         st.bar_chart(bar_chart_data, x='Category', y='Value', color='Group')
 
     np.random.seed(42)
+    # Renamed variables and adjusted data generation to better span the chart area
     scatter_data = pd.DataFrame({
-        'Active Users': np.random.rand(50) * 1000 + 500,
-        'Conversion Rate': np.random.rand(50) * 0.05 + 0.02,
-        'Size': np.random.rand(50) * 10,
-        'Density': np.random.rand(50) * 100
+        'Number of Customers': np.random.rand(50) * 100,      # Data from 0 to 100
+        'Revenue Generated': np.random.rand(50) * 100,        # Data from 0 to 100
+        'Avg Order Value': np.random.rand(50) * 10 + 5,       # For size, ensures points vary
+        'Conversion Efficiency': np.random.rand(50) * 100     # For color, ensures color variance
     })
 
     with chart_cols[1]:
-        st.subheader("Active Users vs. Conversion Rate")
-        st.scatter_chart(scatter_data, x='Active Users', y='Conversion Rate', size='Size', color='Density')
+        st.subheader("Customers vs. Revenue")
+        st.scatter_chart(
+            scatter_data,
+            x='Number of Customers',
+            y='Revenue Generated',
+            size='Avg Order Value',
+            color='Conversion Efficiency',
+            height=350
+        )
 
 
 def about_page():
