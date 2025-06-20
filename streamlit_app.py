@@ -78,7 +78,7 @@ def dashboard_page():
     })
 
     with chart_cols[0]:
-        st.write("### Sales by Category")
+        st.subheader("Sales by Category")
         st.bar_chart(bar_chart_data.set_index('Category'))
 
     # Scatter Plot Data
@@ -90,7 +90,7 @@ def dashboard_page():
     })
 
     with chart_cols[1]:
-        st.write("### Data Distribution (X vs Y)")
+        st.subheader("Data Distribution (X vs Y)")
         st.scatter_chart(scatter_data, x='X', y='Y', size='Size')
 
 
