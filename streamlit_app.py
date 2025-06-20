@@ -70,20 +70,20 @@ def dashboard_page():
 
     np.random.seed(42)
     scatter_data = pd.DataFrame({
-        'Number of Customers': np.random.rand(50) * 100,
-        'Revenue Generated': np.random.rand(50) * 100,
-        'Avg Order Value': np.random.rand(50) * 10 + 5,
-        'Conversion Efficiency': np.random.rand(50) * 100
+        'Acquisition Cost': np.random.rand(50) * 50 + 10,  # e.g., $10 to $60
+        'Customer Lifetime Value': np.random.rand(50) * 500 + 100, # e.g., $100 to $600
+        'Number of Customers Acquired': np.random.rand(50) * 20 + 5, # e.g., 5 to 25 customers, for size
+        'Profitability Index': np.random.rand(50) * 100 # e.g., 0 to 100, for color
     })
 
     with chart_cols[1]:
-        st.subheader("Customers vs. Revenue")
+        st.subheader("Customer Acquisition vs. Lifetime Value")
         st.scatter_chart(
             scatter_data,
-            x='Number of Customers',
-            y='Revenue Generated',
-            size='Avg Order Value',
-            color='Conversion Efficiency',
+            x='Acquisition Cost',
+            y='Customer Lifetime Value',
+            size='Number of Customers Acquired',
+            color='Profitability Index',
             height=350
         )
 
