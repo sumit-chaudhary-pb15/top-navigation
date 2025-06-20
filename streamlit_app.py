@@ -46,15 +46,15 @@ def dashboard_page():
     metric_cols = st.columns(5)
 
     with metric_cols[0]:
-        st.metric(label="Total Sales", value="$1.2M", delta="$12K", delta_color="normal")
+        st.metric(label="Total Sales", value="$1.2M", delta="$12K", delta_color="normal", border=True)
     with metric_cols[1]:
-        st.metric(label="Customers", value="5,800", delta="200", delta_color="normal")
+        st.metric(label="Customers", value="5,800", delta="200", delta_color="normal", border=True)
     with metric_cols[2]:
-        st.metric(label="Avg. Order Value", value="$207", delta="-$5", delta_color="inverse")
+        st.metric(label="Avg. Order Value", value="$207", delta="-$5", delta_color="inverse", border=True)
     with metric_cols[3]:
-        st.metric(label="Conversion Rate", value="3.5%", delta="0.2%", delta_color="normal")
+        st.metric(label="Conversion Rate", value="3.5%", delta="0.2%", delta_color="normal", border=True)
     with metric_cols[4]:
-        st.metric(label="Active Users", value="1,234", delta="15%", delta_color="normal")
+        st.metric(label="Active Users", value="1,234", delta="15%", delta_color="normal", border=True)
 
     chart_cols = st.columns(2)
 
