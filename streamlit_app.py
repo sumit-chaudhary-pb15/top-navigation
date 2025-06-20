@@ -33,7 +33,7 @@ with st.sidebar:
 def home_page():
     st.title("Home Page")
     st.write("Welcome to the home page!")
-    st.write(f"The value from the sidebar slider is: **{st.session_state.get('slider_value', 'N/A')}**")
+    st.success(f"The value from the sidebar slider is: **{st.session_state.get('slider_value', 'N/A')}**")
     st.write("""
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
