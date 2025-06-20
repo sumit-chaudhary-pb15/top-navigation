@@ -38,6 +38,10 @@ def home_page():
         nibh vulputate justo, vitae iaculis est urna vel justo.
     """)
 
+    if st.button("See Dashboard"):
+        st.session_state["_st_current_page_idx"] = 1 # Index for Dashboard page
+
+
 def dashboard_page():
     st.title("Dashboard")
     st.write("Overview of key metrics and data visualizations.")
@@ -70,10 +74,10 @@ def dashboard_page():
 
     np.random.seed(42)
     scatter_data = pd.DataFrame({
-        'Acquisition Cost': np.random.rand(50) * 50 + 10,  # e.g., $10 to $60
-        'Customer Lifetime Value': np.random.rand(50) * 500 + 100, # e.g., $100 to $600
-        'Number of Customers Acquired': np.random.rand(50) * 20 + 5, # e.g., 5 to 25 customers, for size
-        'Profitability Index': np.random.rand(50) * 100 # e.g., 0 to 100, for color
+        'Acquisition Cost': np.random.uniform(0, 60, 50), # Adjusted to ensure values from 0
+        'Customer Lifetime Value': np.random.rand(50) * 500 + 100,
+        'Number of Customers Acquired': np.random.rand(50) * 20 + 5,
+        'Profitability Index': np.random.rand(50) * 100
     })
 
     with chart_cols[1]:
@@ -114,6 +118,7 @@ def contact_page():
     st.text_area("Your Message")
     st.button("Send")
 
+
 # Create pages using Material icons for navigation
 pages = [
     st.Page(home_page, title="Home", icon=":material/home:", default=True),
@@ -123,7 +128,16 @@ pages = [
 ]
 
 # Set up top navigation
-current_page = st.navigation(pages, position="top")
+# Initialize the current page based on session state for button navigation
+if "_st_current_page_idx" not in st.session_state:
+    st.session_state["_st_current_page_idx"] = 0 # Default to home page index
+
+current_page = st.navigation(
+    pages,
+    position="top",
+    # This will set the initial page based on session_state, enabling button navigation
+    index=st.session_state["_st_current_page_idx"]
+)
 
 # Run the selected page
 current_page.run()
