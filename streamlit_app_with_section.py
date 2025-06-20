@@ -121,13 +121,11 @@ about = st.Page(about_page, title="About", icon=":material/info:")
 contact = st.Page(contact_page, title="Contact", icon=":material/mail:")
 
 # Set up top navigation with sections
-current_page = st.navigation(
-    {
-        "Main": [home, dashboard],
-        "Information": [about, contact]
-    },
-    position="top"
-)
+pages = {
+    "Main": [home, dashboard],
+    "Information": [about, contact]
+    }
+current_page = st.navigation(pages, position="top")
 
 # Run the selected page
 current_page.run()
