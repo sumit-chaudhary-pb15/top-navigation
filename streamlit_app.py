@@ -54,7 +54,6 @@ def dashboard_page():
     st.write("Overview of key metrics and data visualizations.")
 
     st.subheader("Key Metrics")
-    # Using st.columns for 5 metrics
     metric_cols = st.columns(5)
 
     with metric_cols[0]:
@@ -68,30 +67,31 @@ def dashboard_page():
     with metric_cols[4]:
         st.metric(label="Active Users", value="1,234", delta="15%", delta_color="normal")
 
-    # Using st.columns for 2 charts
     chart_cols = st.columns(2)
 
-    # Bar Chart Data
+    # Bar Chart Data with a 'Group' for coloring
     bar_chart_data = pd.DataFrame({
         'Category': ['A', 'B', 'C', 'D', 'E'],
-        'Value': [150, 220, 180, 260, 190]
+        'Value': [150, 220, 180, 260, 190],
+        'Group': ['X', 'Y', 'X', 'Y', 'X'] # New column for coloring
     })
 
     with chart_cols[0]:
-        st.subheader("Sales by Category")
-        st.bar_chart(bar_chart_data.set_index('Category'))
+        st.subheader("Sales by Category (Color by Group)")
+        st.bar_chart(bar_chart_data.set_index('Category'), color='Group') # Pass 'Group' to the color argument
 
-    # Scatter Plot Data
-    np.random.seed(42) # for reproducibility
+    # Scatter Plot Data with a 'Density' for coloring
+    np.random.seed(42)
     scatter_data = pd.DataFrame({
         'X': np.random.rand(50) * 100,
         'Y': np.random.rand(50) * 100 + (np.random.rand(50) - 0.5) * 20,
-        'Size': np.random.rand(50) * 10
+        'Size': np.random.rand(50) * 10,
+        'Density': np.random.rand(50) * 100 # New column for coloring
     })
 
     with chart_cols[1]:
-        st.subheader("Data Distribution (X vs Y)")
-        st.scatter_chart(scatter_data, x='X', y='Y', size='Size')
+        st.subheader("Data Distribution (X vs Y, Color by Density)")
+        st.scatter_chart(scatter_data, x='X', y='Y', size='Size', color='Density') # Pass 'Density' to the color argument
 
 
 def about_page():
@@ -130,7 +130,7 @@ else:
 # Create pages using Material icons for navigation
 pages = [
     st.Page(home_page, title="Home", icon=":material/home:", default=True),
-    st.Page(dashboard_page, title="Dashboard", icon=":material/dashboard:"), # <--- New Dashboard page
+    st.Page(dashboard_page, title="Dashboard", icon=":material/dashboard:"),
     st.Page(about_page, title="About", icon=":material/info:"),
     st.Page(contact_page, title="Contact", icon=":material/mail:"),
 ]
