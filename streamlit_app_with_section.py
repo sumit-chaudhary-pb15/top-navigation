@@ -124,7 +124,7 @@ contact = st.Page(contact_page, title="Contact", icon=":material/mail:")
 current_page = st.navigation(
     {
         # "Main": [home, dashboard],
-        [home, dashboard],
+        home, dashboard,
         "Information": [about, contact]
     },
     position="top"
