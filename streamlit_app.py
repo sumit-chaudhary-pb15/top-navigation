@@ -69,16 +69,35 @@ def dashboard_page():
 
     chart_cols = st.columns(2)
 
-    # Bar Chart Data with a 'Group' for coloring
+    # Modified Bar Chart Data for typical bar chart with color by Group
+    # Note: st.bar_chart will display this as regular bars, colored by Group,
+    # not the specific waterfall/segmented style in the screenshot.
     bar_chart_data = pd.DataFrame({
         'Category': ['A', 'B', 'C', 'D', 'E'],
-        'Value': [150, 220, 180, 260, 190],
-        'Group': ['X', 'Y', 'X', 'Y', 'X'] # New column for coloring
+        'Value_X': [150, 180, 200, 160, 220], # Example values for one group
+        'Value_Y': [100, 120, 90, 110, 130] # Example values for another group
     })
 
+    # Reshape data for plotting multiple series with `st.bar_chart` and custom colors
+    # We'll use Altair for better control if you want the exact chart from the image.
+    # For a simple 'bar chart' with different colors, we can have separate columns or melt the data.
+    # Let's melt it to have a 'Group' column for coloring.
+    bar_chart_melted = bar_chart_data.melt(
+        id_vars=['Category'],
+        value_vars=['Value_X', 'Value_Y'],
+        var_name='Group',
+        value_name='Value'
+    )
+    # Rename Group values for clarity in the legend
+    bar_chart_melted['Group'] = bar_chart_melted['Group'].replace({'Value_X': 'Group X', 'Value_Y': 'Group Y'})
+
+
     with chart_cols[0]:
-        st.subheader("Sales by Category (Color by Group)")
-        st.bar_chart(bar_chart_data.set_index('Category'), color='Group') # Pass 'Group' to the color argument
+        st.subheader("Sales by Category (Standard Bar Chart)")
+        # For coloring by a categorical column, ensure it's in the DataFrame
+        # and pass it to the 'color' argument.
+        st.bar_chart(bar_chart_melted, x='Category', y='Value', color='Group')
+
 
     # Scatter Plot Data with a 'Density' for coloring
     np.random.seed(42)
@@ -91,7 +110,7 @@ def dashboard_page():
 
     with chart_cols[1]:
         st.subheader("Data Distribution (X vs Y, Color by Density)")
-        st.scatter_chart(scatter_data, x='X', y='Y', size='Size', color='Density') # Pass 'Density' to the color argument
+        st.scatter_chart(scatter_data, x='X', y='Y', size='Size', color='Density')
 
 
 def about_page():
