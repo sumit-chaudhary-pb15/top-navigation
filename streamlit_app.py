@@ -9,9 +9,8 @@ st.set_page_config(
     page_icon=":material/home:"
 )
 
-# Add the Streamlit logo
+# Logo
 st.logo("https://www.streamlit.io/images/brand/streamlit-mark-color.svg", link="https://streamlit.io")
-
 
 # --- Sidebar Content ---
 with st.sidebar:
@@ -69,43 +68,31 @@ def dashboard_page():
 
     chart_cols = st.columns(2)
 
-    # Modified Bar Chart Data for typical bar chart with color by Group
-    # Note: st.bar_chart will display this as regular bars, colored by Group,
-    # not the specific waterfall/segmented style in the screenshot.
     bar_chart_data = pd.DataFrame({
         'Category': ['A', 'B', 'C', 'D', 'E'],
-        'Value_X': [150, 180, 200, 160, 220], # Example values for one group
-        'Value_Y': [100, 120, 90, 110, 130] # Example values for another group
+        'Value_X': [150, 180, 200, 160, 220],
+        'Value_Y': [100, 120, 90, 110, 130]
     })
 
-    # Reshape data for plotting multiple series with `st.bar_chart` and custom colors
-    # We'll use Altair for better control if you want the exact chart from the image.
-    # For a simple 'bar chart' with different colors, we can have separate columns or melt the data.
-    # Let's melt it to have a 'Group' column for coloring.
     bar_chart_melted = bar_chart_data.melt(
         id_vars=['Category'],
         value_vars=['Value_X', 'Value_Y'],
         var_name='Group',
         value_name='Value'
     )
-    # Rename Group values for clarity in the legend
     bar_chart_melted['Group'] = bar_chart_melted['Group'].replace({'Value_X': 'Group X', 'Value_Y': 'Group Y'})
 
 
     with chart_cols[0]:
         st.subheader("Sales by Category (Standard Bar Chart)")
-        # For coloring by a categorical column, ensure it's in the DataFrame
-        # and pass it to the 'color' argument.
         st.bar_chart(bar_chart_melted, x='Category', y='Value', color='Group')
 
-
-    # Scatter Plot Data with a 'Density' for coloring
     np.random.seed(42)
     scatter_data = pd.DataFrame({
         'X': np.random.rand(50) * 100,
         'Y': np.random.rand(50) * 100 + (np.random.rand(50) - 0.5) * 20,
         'Size': np.random.rand(50) * 10,
-        'Density': np.random.rand(50) * 100 # New column for coloring
+        'Density': np.random.rand(50) * 100
     })
 
     with chart_cols[1]:
@@ -139,7 +126,7 @@ def contact_page():
     st.text_area("Your Message")
     st.button("Send")
 
-# --- Store slider value in session_state to access it across pages ---
+# Store slider value in session_state to access it across pages
 if 'slider_value' not in st.session_state:
     st.session_state['slider_value'] = 50
 else:
