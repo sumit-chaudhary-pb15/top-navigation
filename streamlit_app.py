@@ -68,7 +68,6 @@ def dashboard_page():
     with metric_cols[4]:
         st.metric(label="Active Users", value="1,234", delta="15%", delta_color="normal")
 
-    st.subheader("Data Visualizations")
     # Using st.columns for 2 charts
     chart_cols = st.columns(2)
 
