@@ -84,7 +84,7 @@ def dashboard_page():
 
 
     with chart_cols[0]:
-        st.subheader("Sales by Category (Standard Bar Chart)")
+        st.subheader("Sales by Category")
         st.bar_chart(bar_chart_melted, x='Category', y='Value', color='Group')
 
     np.random.seed(42)
@@ -96,7 +96,7 @@ def dashboard_page():
     })
 
     with chart_cols[1]:
-        st.subheader("Data Distribution (X vs Y, Color by Density)")
+        st.subheader("Data Distribution")
         st.scatter_chart(scatter_data, x='X', y='Y', size='Size', color='Density')
 
 
