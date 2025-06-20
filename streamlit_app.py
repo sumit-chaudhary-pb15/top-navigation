@@ -37,8 +37,6 @@ def home_page():
         lectus justo vitae libero. Integer convallis, mi vitae feugiat accumsan, massa
         nibh vulputate justo, vitae iaculis est urna vel justo.
     """)
-    st.success(f"The value from the sidebar slider is: **{st.session_state.get('slider_value', 'N/A')}**")
-
 
 def dashboard_page():
     st.title("Dashboard")
@@ -115,11 +113,6 @@ def contact_page():
     st.text_input("Your Email")
     st.text_area("Your Message")
     st.button("Send")
-
-# Store slider value in session_state to access it across pages
-if 'slider_value' not in st.session_state:
-    st.session_state['slider_value'] = 50
-
 
 # Create pages using Material icons for navigation
 pages = [
