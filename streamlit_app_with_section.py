@@ -122,9 +122,12 @@ contact = st.Page(contact_page, title="Contact", icon=":material/mail:")
 
 # Set up top navigation with sections
 current_page = st.navigation(
-    "Main": [home, dashboard],
-    "Information": [about, contact], 
-    position="top")
+    {
+        "Main": [home, dashboard],
+        "Information": [about, contact]
+    },
+    position="top"
+)
 
 # Run the selected page
 current_page.run()
