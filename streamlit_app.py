@@ -42,6 +42,7 @@ def dashboard_page():
     st.title("Dashboard")
     st.write("Overview of key metrics and data visualizations.")
 
+    # Metrics
     st.subheader("Key Metrics")
     metric_cols = st.columns(5)
 
@@ -56,6 +57,7 @@ def dashboard_page():
     with metric_cols[4]:
         st.metric(label="Active Users", value="1,234", delta="15%", delta_color="normal", border=True)
 
+    # Charts
     chart_cols = st.columns(2)
 
     bar_chart_data = pd.DataFrame({
